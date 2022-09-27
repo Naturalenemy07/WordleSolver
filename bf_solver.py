@@ -3,8 +3,6 @@ import numpy as np
 
 # Get wordlist
 wordlist = np.loadtxt("fivewordlist.txt", dtype='str')
-# test wordlist
-# wordlist = np.array(["apple", "orang", "banan", "grape", "peary", "durin", "lyche", "almnd", "brnsu", "lime"])
 
 # Initilize
 starting_words = np.array(["crane", "slate", "least", "dealt"])
