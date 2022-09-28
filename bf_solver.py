@@ -2,7 +2,9 @@ from operator import contains
 import numpy as np
 
 # Get wordlist
-wordlist = np.loadtxt("fivewordlist.txt", dtype='str')
+wordlist = np.loadtxt("enhancedwordlist.txt", dtype='str')
+# wordlist = np.unique(wordlist_pre)
+# np.savetxt('enhancedwordlist.txt', wordlist, fmt="%s")
 
 # Initilize
 starting_words = np.array(["crane", "slate", "least", "dealt"])
@@ -48,6 +50,8 @@ def select_next_word():
     possible_words = np.array([])
     not_possible_words = np.array([])
     polished_possible_words = np.array([])
+    polished_possible_words_add = np.array([])
+    polished_possible_words_delete = np.array([])
     super_polished_possible_words = np.array([])
 
     # go through built word and put words from word list that match location of letters
@@ -82,19 +86,24 @@ def select_next_word():
     # remove duplicates(and sort)
     polished_possible_words = np.unique(polished_possible_words)
 
-    print("polished words\n",polished_possible_words)
-
-    # go through words and determine if they contain a letter not a position x, remove words that don't qualify
-    if has_letters_array.size > 0: 
+    # go through words and determine if they contain a letter not a position x, remove words that don't qualify.
+    if has_letters_array.size > 0:
         for letter in has_letters_array:
+            print(letter)
             for word in polished_possible_words:
+                print(word)
                 if letter in word:
-                    super_polished_possible_words = np.append(super_polished_possible_words, word)
+                    print("adding:",word)
+                    polished_possible_words_add = np.append(polished_possible_words_add, word)
+                else:
+                    polished_possible_words_delete = np.append(polished_possible_words_delete, word)
     else:
         super_polished_possible_words = polished_possible_words
 
+    # create super polished by removing words that don't contain all possible letters
+    super_polished_possible_words = np.setdiff1d(polished_possible_words_add,polished_possible_words_delete)
+
     # return a random word
-    print("super polished words\n", super_polished_possible_words)
     print("Next word\n",super_polished_possible_words[np.random.randint(0,super_polished_possible_words.size)])
 
 feedback()
