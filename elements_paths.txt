@@ -1,0 +1,29 @@
+1st row: //*[@id="wordle-app-game"]/div[1]/div/div[1]
+
+	1st letter path: 
+	//*[@id="wordle-app-game"]/div[1]/div/div[1]/div[1]/div
+
+	1st letter elements of interest(letter not in word):
+	aria-label="d absent", data-state="absent"
+	
+	2nd letter path:
+	//*[@id="wordle-app-game"]/div[1]/div/div[1]/div[2]/div
+
+	2nd letter elements of interest(letter in correct spot):
+	aria-label="e correct", data-state="correct"
+	
+	.
+	.
+	.
+	
+	4th letter path:
+	//*[@id="wordle-app-game"]/div[1]/div/div[1]/div[4]/div
+
+	4th letter element of interest(letter in word but not at correct spot:
+	aria-label="l present", data-state="present"
+
+2nd row: //*[@id="wordle-app-game"]/div[1]/div/div[2]
+3rd row: //*[@id="wordle-app-game"]/div[1]/div/div[3]
+4th row: //*[@id="wordle-app-game"]/div[1]/div/div[4]
+5th row: //*[@id="wordle-app-game"]/div[1]/div/div[5]
+6th row: //*[@id="wordle-app-game"]/div[1]/div/div[6]
