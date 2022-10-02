@@ -2,7 +2,7 @@ from operator import contains
 import numpy as np
 
 # Get wordlist
-wordlist = np.loadtxt("enhancedwordlist.txt", dtype='str')
+wordlist1 = np.loadtxt(r"C:\Users\johnd\Documents\School\Graduate School\Computer Science\VSCode\wordlesolver\enhancedwordlist.txt", dtype='str')
 starting_words = np.array(["crane", "slate", "least", "dealt"])
 
 class WordleSolver:
@@ -13,6 +13,7 @@ class WordleSolver:
         self.starting_words = start
         self.not_letters_array = np.array([])
         self.has_letters_array = np.array([])
+        self.has_letters_pos_array = np.array([])
         self.not_possible_words = np.array([])
         self.polished_possible_words = np.array([])
         self.built_word = ["#","#","#","#","#"]
@@ -22,18 +23,19 @@ class WordleSolver:
         for i_holder in range(0,6):
             if i_holder == 0:
                 print("Starting Word:", self.starting_words[np.random.randint(0,self.starting_words.size)])
-                print(self.feedback(), "\n")
-                print(self.select_next_word(), "\n")
+                self.feedback()
+                self.select_next_word()
             else:
-                print(self.feedback(), "\n")
-                print(self.select_next_word(), "\n")
+                self.feedback()
+                self.select_next_word()
 
     def feedback(self):
         # User input
         guess_temp = str(input("Your input: ")).lower()
         correct_letters_temp = str(input("Which letters are in the correct spots, followed by their position (0 to 4), separate different letters by space: ")).lower().split()
         not_letters_temp = str(input("Letters not in word, separated by a space: ")).lower().split()
-        has_letters_temp = str(input("Letters confirmed in word but position unknown: ")).lower().split()
+        # has_letters_temp = str(input("Letters confirmed in word but position unknown: ")).lower().split()
+        has_letters_pos_temp = str(input("Letters in word, include position not at, seperate position by space: ")).lower().split()
 
         # Add guess
         self.guesses = np.append(self.guesses, guess_temp)
@@ -48,13 +50,18 @@ class WordleSolver:
         for letter in not_letters_temp:
             self.not_letters_array = np.append(self.not_letters_array, letter)
 
-        # Add letters that are in has_letters_temp to has letters array
-        for letter in has_letters_temp:
-            self.has_letters_array = np.append(self.has_letters_array, letter)
-        
+        # # Add letters that are in has_letters_temp to has letters array
+        # for letter in has_letters_temp:
+        #     self.has_letters_array = np.append(self.has_letters_array, letter)
+
+        # function that stores the letter and guess position it confirmed is not at
+        for item in has_letters_pos_temp:
+            self.has_letters_pos_array = np.append(self.has_letters_pos_array, item)
+
         # print out built word as a string
-        print("Built Word:")
-        return "".join(self.built_word)
+        print("\nBuilt Word: ", "".join(self.built_word), "\n")
+        return 0
+
 
     def select_next_word(self):
         ## Selects the next word ##
@@ -97,8 +104,11 @@ class WordleSolver:
         # remove duplicates(and sort)
         polished_possible_words_temp = np.unique(polished_possible_words_temp)
 
-        # go through words and determine if they contain a letter not a position x, remove words that don't qualify
-        if self.has_letters_array.size > 0:
+        # go through words and determine if they contain a letter at position inputted, remove words that don't qualify
+        #
+        #### Currently going through this loop to immprove the logic for containing letters, but not at specific position
+        #
+        if self.has_letters_pos_array.size > 0:
             for letter in self.has_letters_array:
                 for word in polished_possible_words_temp:
                     if letter in word:
@@ -108,16 +118,23 @@ class WordleSolver:
             self.polished_possible_words = np.setdiff1d(polished_possible_words_add_temp,polished_possible_words_delete_temp)
         else:
             self.polished_possible_words = polished_possible_words_temp
+        #
+        ##############################
+        #
         
         # remove previous guesses from polished list
         self.polished_possible_words = np.setdiff1d(self.polished_possible_words, self.guesses)
 
         # return a random word
         print("Doesn't have letters: \n", self.not_letters_array,"\n")
-        print("Has letters: \n", self.has_letters_array,"\n")
-        print("Next guess:")
-        return self.polished_possible_words[np.random.randint(0,self.polished_possible_words.size)]
+        # print("Has letters: \n", self.has_letters_array,"\n")
+        print("Has letters, but not at these positions: \n",self.not_letters_pos_array, "\n")
+        print("Next guess:", self.polished_possible_words[np.random.randint(0,self.polished_possible_words.size)], "\n")
+        return 0
+
+    def contains_letters(self):
+        pass
 
 
-# game = WordleSolver(starting_words, wordlist)
-# game.gametracker()
+game = WordleSolver(starting_words, wordlist1)
+game.gametracker()
