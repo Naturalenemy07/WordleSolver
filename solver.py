@@ -125,6 +125,7 @@ class WordleSolver:
         return 0
 
     def get_status(input):
+        # take html input from wordle and return status of the letter
         html_text = input
         starting_int = int(html_text.find('aria-label="')+len('aria-label="'))
         ending_int = int(html_text.find('" aria-live='))
