@@ -2,7 +2,7 @@ from operator import contains
 import numpy as np
 
 # Get wordlist
-wordlist1 = np.loadtxt(r"C:\Users\johnd\Documents\School\Graduate School\Computer Science\VSCode\wordlesolver\enhancedwordlist.txt", dtype='str')
+wordlist1 = np.loadtxt("<Path to word list>", dtype='str')
 starting_words = np.array(["crane", "slate", "least", "dealt"])
 
 class WordleSolver:
