@@ -7,12 +7,12 @@ from wordle_logic import WordleSolver as ws
 import numpy as np
 
 # Get wordlist and create game
-wordlist = np.loadtxt("C:\\Users\\johnd\\Documents\\School\\Graduate School\\Computer Science\\VSCode\\wordlesolver\\enhancedwordlist.txt", dtype='str')
+wordlist = np.loadtxt("<path to enhancedwordlist.txt>", dtype='str')
 starting_words = np.array(["crane", "slate", "least", "dealt"])
 game = ws(starting_words, wordlist)
 
 # Start up automated bot
-s = Service('C:\\Users\\johnd\Documents\\School\\Graduate School\\Computer Science\\VSCode\\chromedriver_win32\\chromedriver.exe')
+s = Service('<path to chromedriver.exe>')
 browser = webdriver.Chrome(service=s)
 url = 'https://www.nytimes.com/games/wordle/index.html'
 browser.get(url)
