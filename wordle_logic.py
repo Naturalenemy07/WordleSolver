@@ -10,6 +10,7 @@ class WordleSolver:
         self.absent_letters_array = np.array([])
         self.correct_letters_array = np.array([])
         self.present_letters_array = np.array([])
+        self.present_letters_string = ""
         self.built_word = ["#","#","#","#","#"]
 
     def first_word(self):
@@ -34,11 +35,14 @@ class WordleSolver:
             elif "present" in status[stat]:
                 # ["a0" "b1" "c2"] letter followed by position not in
                 present_letters_temp.append(str(status[stat][0]+str(stat)))
+                # add the character only to the present letter string
+                self.present_letters_string+=status[stat][0]
 
         # Build word based off of correct letters and positions
         for item in correct_letters_temp:
             self.built_word.insert(int(item[1]), item[0])
             self.built_word.pop(int(item[1])+1)
+        print("".join(self.built_word))
 
         # Add new letters that are in absent_letters_temp to absent_letters_array
         for letter in absent_letters_temp:
@@ -58,14 +62,15 @@ class WordleSolver:
         for letter in absent_letters_temp:
             for word in self.possible_words:
                 if letter in self.built_word:
-                    pass
+                    break
+                elif letter in self.present_letters_string:
+                    break
                 elif letter in word:
                     words_to_delete = np.append(words_to_delete, word)
 
         # go through "possible words array", add words to "words to delete" words that contain letter at position in "present letters"
         for letter_position in present_letters_temp:
             for word in self.possible_words:
-                # if 
                 if letter_position[0] not in word:
                     words_to_delete = np.append(words_to_delete, word)
                 elif word[int(letter_position[1])] == letter_position[0]:
@@ -88,6 +93,7 @@ class WordleSolver:
         
         # remove words that do not match position of built word
         self.possible_words = np.setdiff1d(self.possible_words, words_to_delete)
+        print(self.possible_words)
 
         return self.possible_words[np.random.randint(0,self.possible_words.size)]
 
