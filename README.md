@@ -1,5 +1,5 @@
 # WordleSolver
 
-Currently contains a program to brute force solve [Wordle](https://www.nytimes.com/games/wordle/index.html). There is also text file that contains about 2,500 words that are five letters long.
+This repository contains programs to solve [Wordle](https://www.nytimes.com/games/wordle/index.html) puzzles.  bf_solver.py is a manual input program using enhancedwordlist.txt as a database of words.  wordle_solver.py and wordle_logic.py work together to automatically solve the wordle puzzle using the same database.  solver will interact with the [Wordle](https://www.nytimes.com/games/wordle/index.html) website to gather feedback and input guesses based on that feedback.  A initial wordlist is hardcoded to four recommended words to start with.  logic is the brute force algorithm that narrows down the possible words based on what letters are correct, present and absent.  
 
-Robot to solve Wordle in progress.  Uses python, selenium, and chromedriver.  Will add more information and links once files are completed.
+Currently, plans are to develop more interesting algorithms to solve wordle puzzles.  Feel free to go ahead and use these as a baseline for your own wordle solvers.
