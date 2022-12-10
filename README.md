@@ -5,3 +5,6 @@ This repository contains programs to solve [Wordle](https://www.nytimes.com/game
 wordle_solver uses [Selenium](https://www.selenium.dev/) and [ChromeDriver](https://chromedriver.chromium.org/downloads) for automated website interaction. Drivers also exist for other popular browsers, see [Selenium Browser Drivers](https://www.selenium.dev/documentation/webdriver/getting_started/install_drivers/) for the list.
 
 Currently, plans are to develop more interesting algorithms to solve wordle puzzles.  Feel free to go ahead and use these as a baseline for your own wordle solvers.
+
+### Update (09Dec22)
+The Chrome edition has been updated and the current edition of Chromedriver doesn't work.  Currently working on a fix. 
