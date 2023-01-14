@@ -10,6 +10,9 @@ You will need to download [Selenium](https://www.selenium.dev/) and [ChromeDrive
 
 ### Packages
 selenium
+
 webdriver_auto_update
+
 numpy
+
 time
