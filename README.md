@@ -8,7 +8,7 @@ Currently, plans are to develop more interesting algorithms to solve wordle puzz
 
 You will need to download [Selenium](https://www.selenium.dev/) and [ChromeDriver](https://chromedriver.chromium.org/downloads) prior to use.  wordle_solver will check for Chromedriver updates and update accordingly using [webdriver-auto-update](https://pypi.org/project/webdriver-auto-update/).\
 
-###Packages
+### Packages
 selenium
 webdriver_auto_update
 numpy
