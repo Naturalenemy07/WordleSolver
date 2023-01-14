@@ -8,3 +8,6 @@ Currently, plans are to develop more interesting algorithms to solve wordle puzz
 
 ### Update (09Dec22)
 The Chrome edition has been updated and the current edition of Chromedriver doesn't work.  Currently working on a fix. 
+
+### Update (13Jan23)
+Added checkdriver.py and gave wordle_solver.py the ability to update chromedriver.  May need to update Chrome itself if an error is thrown.  
