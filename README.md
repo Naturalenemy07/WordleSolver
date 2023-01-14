@@ -6,7 +6,7 @@ wordle_solver uses [Selenium](https://www.selenium.dev/) and [ChromeDriver](http
 
 Currently, plans are to develop more interesting algorithms to solve wordle puzzles.  Feel free to go ahead and use these as a baseline for your own wordle solvers.
 
-You will need to download [Selenium](https://www.selenium.dev/) and [ChromeDriver](https://chromedriver.chromium.org/downloads) prior to use.  wordle_solver will check for Chromedriver updates and update accordingly using [webdriver-auto-update](https://pypi.org/project/webdriver-auto-update/).\
+You will need to download [Selenium](https://www.selenium.dev/) and [ChromeDriver](https://chromedriver.chromium.org/downloads) prior to use.  wordle_solver will check for Chromedriver updates and update accordingly using [webdriver-auto-update](https://pypi.org/project/webdriver-auto-update/).
 
 ### Packages
 selenium  
