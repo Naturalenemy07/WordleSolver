@@ -8,6 +8,8 @@ Currently, plans are to develop more interesting algorithms to solve wordle puzz
 
 You will need to download [Selenium](https://www.selenium.dev/) and [ChromeDriver](https://chromedriver.chromium.org/downloads) prior to use.  wordle_solver will check for Chromedriver updates and update accordingly using [webdriver-auto-update](https://pypi.org/project/webdriver-auto-update/).
 
+As of June 2023, Chrome for Testing is released [CfT](https://developer.chrome.com/blog/chrome-for-testing/) and [GoogleChromeLabs CfT](https://github.com/GoogleChromeLabs/chrome-for-testing#json-api-endpoints). I will update the README to reflect usage of CfT, at this time school is starting and I have limited time, but will update it as soon as possible. 
+
 ### Packages
 selenium  
 webdriver_auto_update  
