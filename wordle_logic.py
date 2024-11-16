@@ -28,18 +28,19 @@ class WordleSolver:
         guess_temp = ""
         for stat in range(0,5):
             # guess_temp += status[stat][0].lower()
-            guess_temp += status[stat].split(',')[1].strip().lower()
+            letter = status[stat].split(',')[1].strip().lower()
+            guess_temp += letter
             if "correct" in status[stat]:
                 # ["a0" "b1" "c2"] letter followed by correct position
-                correct_letters_temp.append(str(status[stat].split(',')[1].strip()+str(stat)))
+                correct_letters_temp.append(str(letter+str(stat)))
             elif "absent" in status[stat]:
                 # ["a" "b" "c"]
-                absent_letters_temp.append(str(status[stat].split(',')[1].strip()))
+                absent_letters_temp.append(str(letter))
             elif "present" in status[stat]:
                 # ["a0" "b1" "c2"] letter followed by position not in
-                present_letters_temp.append(str(status[stat].split(',')[1].strip()+str(stat)))
+                present_letters_temp.append(str(letter+str(stat)))
                 # add the character only to the present letter string
-                self.present_letters_string+=status[stat].split(',')[1].strip()
+                self.present_letters_string+=letter
 
         # Build word based off of correct letters and positions
         for item in correct_letters_temp:
