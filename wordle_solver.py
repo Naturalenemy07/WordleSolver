@@ -1,36 +1,45 @@
 import time
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
+# from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 from wordle_logic import WordleSolver as ws
-from checkdriver import Checker
+# from checkdriver import Checker
 import numpy as np
 
 # Get wordlist and create game
-pathToCDexe = 'path\to\chromedriver.exe'
-pathToCD = 'path\to\chromedriver_win32'
-wordlist = np.loadtxt("path\to\enhancedwordlist.txt", dtype='str')
-starting_words = np.array(["reach", "dealt", "salet", "crane", "audio"])
+# pathToCDexe = 'C:\\Users\\johnd\\Documents\\School\\Graduate School\\Computer Science\\VSCode\\chromedriver_win32\\chromedriver.exe'
+# pathToCD = 'C:\\Users\\johnd\\Documents\\School\\Graduate School\\Computer Science\\VSCode\\chromedriver_win32'
+wordlist = np.loadtxt('C:\\Users\\johnd\\Documents\\School\\Graduate School\\Computer Science\\VSCode\\wordlesolver\\enhancedwordlist.txt', dtype='str')
+starting_words = np.array(["reach", "dealt", "salet", "crane", "audio", "lousy"])
 game = ws(starting_words, wordlist)
 
 # Update Chromedriver as needed
-ckr = Checker(pathToCD)
+# ckr = Checker(pathToCD)
 
 # Start up automated bot
-s = Service(pathToCDexe)
-browser = webdriver.Chrome(service=s)
+# s = Service(pathToCDexe)
+browser = webdriver.Firefox()
+actions = ActionChains(browser) 
+# browser = webdriver.Chrome(service=s)
 url = 'https://www.nytimes.com/games/wordle/index.html'
 browser.get(url)
 time.sleep(5)
+
+# click on button to play
+# play_button = browser.find_element(By.CLASS_NAME, 'Welcome-module_button__ZG0Zh') # This is the subscribe button
+play_button = browser.find_element(By.XPATH, '/html/body/div[2]/div/div/div/div/div[2]/button[2]')
+play_button.click()
+time.sleep(10)
 
 # click on exit button on popup
 exit_button = browser.find_element(By.CLASS_NAME, 'game-icon')
 exit_button.click()
 time.sleep(2)
 
-# find interactable element
-interactable = browser.find_element(By.CLASS_NAME, 'Key-module_key__kchQI')
+# find interactable element (this sometimes changes...)
+interactable = browser.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/main/div[2]/div[3]/button[1]') #Enter button
 browser.implicitly_wait(10)
 
 def type_in_word(word):
@@ -48,9 +57,13 @@ def check_status(row):
     word_status_list = []
     for let_pos in range(1,6):
         try:
-            status_input = str(browser.find_element(By.XPATH, '/html/body/div/div/div[2]/div/div[1]/div/div['+str(row)+']/div['+str(let_pos)+']/div').get_attribute('outerHTML'))
+            status_input = str(browser.find_element(By.XPATH, '/html/body/div[2]/div/div[4]/main/div[1]/div/div['+str(row)+']/div['+str(let_pos)+']/div').get_attribute('outerHTML'))
         except:
-            status_input = str(browser.find_element(By.XPATH, '/html/body/div/div/div/div/div[1]/div/div['+str(row)+']/div['+str(let_pos)+']/div').get_attribute('outerHTML'))
+            raise Exception
+        # try:
+        #     status_input = str(browser.find_element(By.XPATH, '/html/body/div/div/div[2]/div/div[1]/div/div['+str(row)+']/div['+str(let_pos)+']/div').get_attribute('outerHTML'))
+        # except:
+        #     status_input = str(browser.find_element(By.XPATH, '/html/body/div/div/div/div/div[1]/div/div['+str(row)+']/div['+str(let_pos)+']/div').get_attribute('outerHTML'))
         browser.implicitly_wait(10)
         word_status_list.append(game.return_aria_label(status_input))
     return word_status_list

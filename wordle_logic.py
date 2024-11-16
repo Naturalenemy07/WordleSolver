@@ -1,8 +1,7 @@
 import numpy as np
 
 class WordleSolver:
-
-    # Initilize
+    # Initilize WordleSolver class
     def __init__(self, start, wordlist):
         self.wordlist = wordlist
         self.possible_words = wordlist
@@ -13,30 +12,35 @@ class WordleSolver:
         self.present_letters_string = ""
         self.built_word = ["#","#","#","#","#"]
 
-    def first_word(self):
+    # text object that is a randomly selected first word
+    def first_word(self): 
         first_word = str(self.starting_words[np.random.randint(0,self.starting_words.size)])
         return first_word
 
+    # text object that is the word selected that is based off the correct, absent or present letters
     def feedback_select(self, status):
         correct_letters_temp = []
         absent_letters_temp = []
         present_letters_temp = []
+        print(status)
 
         # Input as a list, add to appropriate lists
         guess_temp = ""
         for stat in range(0,5):
-            guess_temp += status[stat][0].lower()
+            # guess_temp += status[stat][0].lower()
+            letter = status[stat].split(',')[1].strip().lower()
+            guess_temp += letter
             if "correct" in status[stat]:
                 # ["a0" "b1" "c2"] letter followed by correct position
-                correct_letters_temp.append(str(status[stat][0]+str(stat)))
+                correct_letters_temp.append(str(letter+str(stat)))
             elif "absent" in status[stat]:
                 # ["a" "b" "c"]
-                absent_letters_temp.append(str(status[stat][0]))
+                absent_letters_temp.append(str(letter))
             elif "present" in status[stat]:
                 # ["a0" "b1" "c2"] letter followed by position not in
-                present_letters_temp.append(str(status[stat][0]+str(stat)))
+                present_letters_temp.append(str(letter+str(stat)))
                 # add the character only to the present letter string
-                self.present_letters_string+=status[stat][0]
+                self.present_letters_string+=letter
 
         # Build word based off of correct letters and positions
         for item in correct_letters_temp:
@@ -95,8 +99,13 @@ class WordleSolver:
         self.possible_words = np.setdiff1d(self.possible_words, words_to_delete)
         print(self.possible_words)
 
+        # return a randomly selected word that remains in possible words list
         return self.possible_words[np.random.randint(0,self.possible_words.size)]
 
+        # assign a score to each word, then choose word that has scored the highest
+
+
+    # text object that is the actual status of each letter in word (absent, present, correct)
     def return_aria_label(self, input):
         html_text = input
         starting_int = int(html_text.find('aria-label="')+len('aria-label="'))
@@ -104,6 +113,7 @@ class WordleSolver:
         aria_label = html_text[starting_int: ending_int]
         return aria_label
 
+    # boolean object that returns if game is over
     def game_end(self, input):
         status_int = 0
         for stat in input:
