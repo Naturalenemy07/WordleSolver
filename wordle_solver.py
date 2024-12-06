@@ -29,9 +29,22 @@ time.sleep(5)
 
 # click on button to play
 # play_button = browser.find_element(By.CLASS_NAME, 'Welcome-module_button__ZG0Zh') # This is the subscribe button
-play_button = browser.find_element(By.XPATH, '/html/body/div[2]/div/div/div/div/div[2]/button[2]')
-play_button.click()
-time.sleep(10)
+inits = 0
+try:
+    play_button = browser.find_element(By.XPATH, '/html/body/div[2]/div/div/div/div/div[2]/button[2]')
+    play_button.click()
+    time.sleep(5)
+except:
+    # This is a popup for terms and conditions
+    popups = browser.find_element(By.CLASS_NAME, ("purr-blocker-card__button"))
+    popups.click()
+    time.sleep(5)
+
+    welcome_box = browser.find_element(By.XPATH,'/html/body/div[2]/div/div/div/div/div[2]')
+    print("welcome box\n",welcome_box)
+
+    play_button = browser.find_element(By.CSS_SELECTOR, '[data-testid="Play"]')
+    play_button.click()
 
 # click on exit button on popup
 exit_button = browser.find_element(By.CLASS_NAME, 'game-icon')
@@ -78,6 +91,7 @@ for row in range(1, 7):
     else:
     # inputs guessed word with output from check status
         next_word = game.feedback_select(word_status)
+        print(f"Next guess: {next_word}\n")
         time.sleep(2)
         type_in_word(next_word)
     
@@ -86,6 +100,6 @@ for row in range(1, 7):
 
     # Checks to see status, if status_int is 5, that means all letters are correct
     if game.game_end(word_status):
-        print("Solved!")
+        print(f"Solved! Correct word is: {next_word}")
         browser.quit()
         quit()
